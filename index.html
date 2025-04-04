@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Protected Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding-top: 100px;
+        background-color: #f4f4f4;
+      }
+      input {
+        padding: 10px;
+        font-size: 16px;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>This page is protected. Enter password to continue.</h2>
+    <input type="password" id="password" placeholder="Enter password" />
+    <button onclick="checkPassword()">Submit</button>
+
+    <script>
+      const correctPassword = "yourpassword"
+      const redirectURL = "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4";
+
+      function checkPassword() {
+        const input = document.getElementById("password").value;
+        if (input === correctPassword) {
+          window.location.href = redirectURL;
+        } else {
+          alert("Incorrect password. Try again.");
+        }
+      }
+    </script>
+  </body>
+</html>
