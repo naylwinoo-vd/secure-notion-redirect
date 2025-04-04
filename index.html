@@ -120,13 +120,22 @@
       flex-direction: column;
     }
 
-    .loading-screen img {
-      width: 100px;
-      height: auto;
+    .spinner {
+      width: 64px;
+      height: 64px;
+      border: 8px solid #f3f3f3;
+      border-top: 8px solid #0047ab;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 16px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .loading-screen p {
-      margin-top: 16px;
       font-size: 16px;
       color: #0047ab;
     }
@@ -173,13 +182,12 @@
     </div>
   </div>
 
-  <!-- Loading Animation -->
+  <!-- Loading Spinner -->
   <div id="loading" class="loading-screen">
-    <img src="https://i.imgur.com/YVqV8Z0.gif" alt="Loading..." />
+    <div class="spinner"></div>
     <p>Redirecting securely...</p>
   </div>
 
-  <!-- Script -->
   <script>
     const passwordMap = {
       "hello@COUPFeb1":
