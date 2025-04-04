@@ -3,117 +3,177 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NUG - MOD Access</title>
+    <title>MOD Finance Access</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background-color: #fff;
+      * {
+        box-sizing: border-box;
       }
 
-      .landing {
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f8fafc;
+        font-family: 'Times New Roman', Times, serif;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: start;
+        min-height: 100vh;
         padding: 40px 20px;
-        text-align: center;
       }
 
-      .landing img.logo {
+      .container {
+        text-align: center;
+        max-width: 800px;
         width: 100%;
-        max-width: 700px;
+      }
+
+      .logo {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        margin-bottom: 30px;
+      }
+
+      .welcome-text {
+        color: #0047ab;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 1.6;
         margin-bottom: 40px;
       }
 
-      input {
-        padding: 12px;
-        font-size: 20px;
-        width: 80%;
+      .input-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 90%;
         max-width: 400px;
+      }
+
+      input[type="password"],
+      input[type="text"] {
+        padding: 14px;
+        font-size: 18px;
+        width: 100%;
         text-align: center;
         border: 2px solid #0047ab;
-        border-radius: 6px;
-        margin-bottom: 20px;
+        border-radius: 8px;
         color: #0047ab;
-        letter-spacing: 4px;
+        padding-right: 50px;
+      }
+
+      .toggle-visibility {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        cursor: pointer;
+        color: #0047ab;
       }
 
       button {
-        padding: 12px 24px;
-        background: #0047ab;
+        padding: 12px 28px;
+        background-color: #0047ab;
         color: white;
-        font-size: 16px;
         border: none;
         border-radius: 6px;
+        font-size: 16px;
         cursor: pointer;
-        transition: background-color 0.2s ease-in-out;
+        margin-top: 20px;
       }
 
       button:hover {
-        background-color: #003b8f;
+        background-color: #003c99;
       }
 
-      .error-screen {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        text-align: center;
-        background-color: white;
-      }
-
-      .error-screen img {
-        max-width: 800px;
-        width: 90%;
-      }
-
-      .contact {
-        margin-top: 30px;
+      .error-message {
+        color: #ef4444;
+        font-weight: bold;
         font-size: 16px;
-        color: black;
+        margin-top: 20px;
+        display: none;
       }
 
-      .contact strong {
-        display: block;
-        font-size: 18px;
-        margin-top: 10px;
+      @media (max-width: 500px) {
+        .welcome-text {
+          font-size: 16px;
+        }
+
+        input,
+        button {
+          font-size: 16px;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- Landing Page -->
-    <div class="landing" id="landing">
-      <img src="https://i.imgur.com/wrCPQ63.png" alt="MOD Welcome" class="logo" />
-      <input type="password" id="password" placeholder="TYPE YOUR ACCESS PASSWORD HERE" />
-      <button onclick="checkPassword()">Enter</button>
-    </div>
+    <div class="container" id="landing">
+      <img
+        src="https://i.imgur.com/tDu3VcL.png"
+        alt="MOD Logo"
+        class="logo"
+      />
 
-    <!-- Error Page -->
-    <div class="error-screen" id="errorScreen">
-      <img src="https://i.imgur.com/tWbOiMJ.png" alt="Wrong Password" />
-      <div class="contact">
-        <strong>TALK TO US</strong>
-        +1 (914) 336 4080 (Signal)<br />
-        finance@modnug.org
+      <div class="welcome-text">
+        Hello There!<br />
+        Welcome to the E-Portal of MOD's Finance Department.<br />
+        Currently we are still at the testing stage and if you face any problems
+        accessing the information, please reach out to
+        <a href="mailto:finance@modnug.com">finance@modnug.com</a>.
       </div>
+
+      <div class="input-wrapper">
+        <input
+          type="password"
+          id="password"
+          placeholder="Type your access password"
+          autofocus
+        />
+        <span class="toggle-visibility" onclick="togglePassword()">👁️</span>
+      </div>
+      <br />
+      <button onclick="checkPassword()">Submit</button>
+      <div id="error" class="error-message">Your access password is incorrect.</div>
     </div>
 
     <script>
       const passwordMap = {
-        "hello@COUPFeb1": "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4",
-        "team2025": "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4"
+        "hello@COUPFeb1":
+          "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4",
+        "team2025":
+          "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4"
       };
 
       function checkPassword() {
         const input = document.getElementById("password").value.trim();
+        const error = document.getElementById("error");
+
         if (passwordMap[input]) {
           window.location.href = passwordMap[input];
         } else {
-          document.getElementById("landing").style.display = "none";
-          document.getElementById("errorScreen").style.display = "flex";
+          error.style.display = "block";
         }
       }
+
+      function togglePassword() {
+        const input = document.getElementById("password");
+        const toggle = document.querySelector(".toggle-visibility");
+        if (input.type === "password") {
+          input.type = "text";
+          toggle.textContent = "👁️‍🗨️";
+        } else {
+          input.type = "password";
+          toggle.textContent = "👁️";
+        }
+      }
+
+      // Enter key to submit
+      document.getElementById("password").addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          checkPassword();
+        }
+      });
     </script>
   </body>
 </html>
