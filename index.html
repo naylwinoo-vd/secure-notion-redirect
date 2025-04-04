@@ -1,38 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Protected Page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NUG - MOD Access</title>
     <style>
       body {
         font-family: Arial, sans-serif;
-        text-align: center;
-        padding-top: 100px;
-        background-color: #f4f4f4;
+        margin: 0;
+        background-color: #fff;
       }
+
+      .landing {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px 20px;
+        text-align: center;
+      }
+
+      .landing img.logo {
+        width: 100%;
+        max-width: 700px;
+        margin-bottom: 40px;
+      }
+
       input {
-        padding: 10px;
+        padding: 12px;
+        font-size: 20px;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        border: 2px solid #0047ab;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        color: #0047ab;
+        letter-spacing: 4px;
+      }
+
+      button {
+        padding: 12px 24px;
+        background: #0047ab;
+        color: white;
         font-size: 16px;
-        margin: 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      button:hover {
+        background-color: #003b8f;
+      }
+
+      .error-screen {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        text-align: center;
+        background-color: white;
+      }
+
+      .error-screen img {
+        max-width: 800px;
+        width: 90%;
+      }
+
+      .contact {
+        margin-top: 30px;
+        font-size: 16px;
+        color: black;
+      }
+
+      .contact strong {
+        display: block;
+        font-size: 18px;
+        margin-top: 10px;
       }
     </style>
   </head>
   <body>
-    <h2>This page is protected. Enter password to continue.</h2>
-    <input type="password" id="password" placeholder="Enter password" />
-    <button onclick="checkPassword()">Submit</button>
+    <!-- Landing Page -->
+    <div class="landing" id="landing">
+      <img src="https://i.imgur.com/wrCPQ63.png" alt="MOD Welcome" class="logo" />
+      <input type="password" id="password" placeholder="TYPE YOUR ACCESS PASSWORD HERE" />
+      <button onclick="checkPassword()">Enter</button>
+    </div>
+
+    <!-- Error Page -->
+    <div class="error-screen" id="errorScreen">
+      <img src="https://i.imgur.com/tWbOiMJ.png" alt="Wrong Password" />
+      <div class="contact">
+        <strong>TALK TO US</strong>
+        +1 (914) 336 4080 (Signal)<br />
+        finance@modnug.org
+      </div>
+    </div>
 
     <script>
-  const correctPassword = "hello@COUPFeb1";
-  const redirectURL = "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4";
+      const passwordMap = {
+        "hello@COUPFeb1": "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4",
+        "team2025": "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4"
+      };
 
-  function checkPassword() {
-    const input = document.getElementById("password").value;
-    if (input === correctPassword) {
-      window.location.href = redirectURL;
-    } else {
-      alert("Incorrect password. Try again.");
-    }
-  }
-</script>
+      function checkPassword() {
+        const input = document.getElementById("password").value.trim();
+        if (passwordMap[input]) {
+          window.location.href = passwordMap[input];
+        } else {
+          document.getElementById("landing").style.display = "none";
+          document.getElementById("errorScreen").style.display = "flex";
+        }
+      }
+    </script>
   </body>
 </html>
