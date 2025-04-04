@@ -1,179 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MOD Finance Access</title>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOD Finance Portal</title>
+  <style>
+    * { box-sizing: border-box; }
 
-      body {
-        margin: 0;
-        padding: 0;
-        background-color: #f8fafc;
-        font-family: 'Times New Roman', Times, serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: start;
-        min-height: 100vh;
-        padding: 40px 20px;
-      }
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background-color: #f8fafc;
+      font-family: 'Times New Roman', Times, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
 
-      .container {
-        text-align: center;
-        max-width: 800px;
-        width: 100%;
-      }
+    .container {
+      text-align: center;
+      max-width: 800px;
+      width: 100%;
+    }
 
-      .logo {
-        width: 100%;
-        max-width: 200px;
-        height: auto;
-        margin-bottom: 30px;
-      }
+    .logo {
+      width: 100%;
+      max-width: 200px;
+      margin-bottom: 30px;
+    }
 
+    .welcome-text {
+      color: #0047ab;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: inline-block;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    input[type="password"],
+    input[type="text"] {
+      padding: 14px;
+      font-size: 18px;
+      width: 100%;
+      text-align: center;
+      border: 2px solid #0047ab;
+      border-radius: 8px;
+      color: #0047ab;
+      padding-right: 50px;
+    }
+
+    .toggle-visibility {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      cursor: pointer;
+      color: #0047ab;
+    }
+
+    button {
+      padding: 12px 28px;
+      background-color: #0047ab;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #003c99;
+    }
+
+    .error-message {
+      color: #ef4444;
+      font-weight: bold;
+      font-size: 16px;
+      margin-top: 20px;
+      display: none;
+    }
+
+    .disclaimer {
+      font-size: 12px;
+      color: #444;
+      margin-top: 60px;
+      border-top: 1px solid #ddd;
+      padding-top: 20px;
+      text-align: left;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .disclaimer strong {
+      display: block;
+      color: #b91c1c;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .loading-screen {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: white;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .loading-screen img {
+      width: 100px;
+      height: auto;
+    }
+
+    .loading-screen p {
+      margin-top: 16px;
+      font-size: 16px;
+      color: #0047ab;
+    }
+
+    @media (max-width: 500px) {
       .welcome-text {
-        color: #0047ab;
-        font-weight: bold;
-        font-size: 18px;
-        line-height: 1.6;
-        margin-bottom: 40px;
-      }
-
-      .input-wrapper {
-        position: relative;
-        display: inline-block;
-        width: 90%;
-        max-width: 400px;
-      }
-
-      input[type="password"],
-      input[type="text"] {
-        padding: 14px;
-        font-size: 18px;
-        width: 100%;
-        text-align: center;
-        border: 2px solid #0047ab;
-        border-radius: 8px;
-        color: #0047ab;
-        padding-right: 50px;
-      }
-
-      .toggle-visibility {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 20px;
-        cursor: pointer;
-        color: #0047ab;
-      }
-
-      button {
-        padding: 12px 28px;
-        background-color: #0047ab;
-        color: white;
-        border: none;
-        border-radius: 6px;
         font-size: 16px;
-        cursor: pointer;
-        margin-top: 20px;
       }
 
-      button:hover {
-        background-color: #003c99;
-      }
-
-      .error-message {
-        color: #ef4444;
-        font-weight: bold;
+      input, button {
         font-size: 16px;
-        margin-top: 20px;
-        display: none;
       }
 
-      @media (max-width: 500px) {
-        .welcome-text {
-          font-size: 16px;
-        }
-
-        input,
-        button {
-          font-size: 16px;
-        }
+      .disclaimer {
+        font-size: 11px;
       }
-    </style>
-  </head>
-  <body>
-    <div class="container" id="landing">
-      <img
-        src="https://i.imgur.com/tDu3VcL.png"
-        alt="MOD Logo"
-        class="logo"
-      />
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Page -->
+  <div class="container" id="landing">
+    <img src="https://i.imgur.com/tDu3VcL.png" alt="MOD Logo" class="logo" />
 
-      <div class="welcome-text">
-        Hello There!<br />
-        Welcome to the E-Portal of MOD's Finance Department.<br />
-        Currently we are still at the testing stage and if you face any problems
-        accessing the information, please reach out to
-        <a href="mailto:finance@modnug.com">finance@modnug.com</a>.
-      </div>
-
-      <div class="input-wrapper">
-        <input
-          type="password"
-          id="password"
-          placeholder="Type your access password"
-          autofocus
-        />
-        <span class="toggle-visibility" onclick="togglePassword()">👁️</span>
-      </div>
-      <br />
-      <button onclick="checkPassword()">Submit</button>
-      <div id="error" class="error-message">Your access password is incorrect.</div>
+    <div class="welcome-text">
+      Welcome to the official E-Portal of the Finance Department, Ministry of Defence.<br /><br />
+      This system is intended exclusively for authorized personnel with valid credentials.
+      The portal contains classified and sensitive financial data critical to the operations of the Ministry.<br /><br />
+      To proceed, please enter your secure access credentials.
     </div>
 
-    <script>
-      const passwordMap = {
-        "hello@COUPFeb1":
-          "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4",
-        "team2025":
-          "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4"
-      };
+    <div class="input-wrapper">
+      <input type="password" id="password" placeholder="Type your access password" autofocus />
+      <span class="toggle-visibility" onclick="togglePassword()">👁️</span>
+    </div>
+    <br />
+    <button onclick="checkPassword()">Submit</button>
+    <div id="error" class="error-message">Your access password is incorrect.</div>
 
-      function checkPassword() {
-        const input = document.getElementById("password").value.trim();
-        const error = document.getElementById("error");
+    <div class="disclaimer">
+      <strong>WARNING: UNAUTHORIZED ACCESS PROHIBITED</strong>
+      This is a restricted government system. Access is limited to authorized users only. All activities on this portal are monitored and recorded. Unauthorized access, attempted breaches, or misuse of information may result in disciplinary action, legal prosecution, and criminal penalties under applicable laws.<br /><br />
+      By logging in, you acknowledge your compliance with official security protocols and agree to use this system in accordance with government policies and regulations.
+    </div>
+  </div>
 
-        if (passwordMap[input]) {
+  <!-- Loading Animation -->
+  <div id="loading" class="loading-screen">
+    <img src="https://i.imgur.com/YVqV8Z0.gif" alt="Loading..." />
+    <p>Redirecting securely...</p>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const passwordMap = {
+      "hello@COUPFeb1":
+        "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4",
+      "team2025":
+        "https://eager-wishbone-6a6.notion.site/MoD-x-MoPFI-Weekly-Joint-Meeting-Decisions-Notes-1cb5ea78060f8054aeccdf3ee60660e2?pvs=4"
+    };
+
+    function checkPassword() {
+      const input = document.getElementById("password").value.trim();
+      const error = document.getElementById("error");
+
+      if (passwordMap[input]) {
+        error.style.display = "none";
+        document.getElementById("landing").style.display = "none";
+        document.getElementById("loading").style.display = "flex";
+
+        setTimeout(() => {
           window.location.href = passwordMap[input];
-        } else {
-          error.style.display = "block";
-        }
+        }, 2500);
+      } else {
+        error.style.display = "block";
       }
+    }
 
-      function togglePassword() {
-        const input = document.getElementById("password");
-        const toggle = document.querySelector(".toggle-visibility");
-        if (input.type === "password") {
-          input.type = "text";
-          toggle.textContent = "👁️‍🗨️";
-        } else {
-          input.type = "password";
-          toggle.textContent = "👁️";
-        }
+    function togglePassword() {
+      const input = document.getElementById("password");
+      const toggle = document.querySelector(".toggle-visibility");
+      if (input.type === "password") {
+        input.type = "text";
+        toggle.textContent = "👁️‍🗨️";
+      } else {
+        input.type = "password";
+        toggle.textContent = "👁️";
       }
+    }
 
-      // Enter key to submit
-      document.getElementById("password").addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-          checkPassword();
-        }
-      });
-    </script>
-  </body>
+    document.getElementById("password").addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        checkPassword();
+      }
+    });
+  </script>
+</body>
 </html>
